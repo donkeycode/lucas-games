@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Entity\gamesRepository")
  */
 class games
 {
@@ -19,11 +19,7 @@ class games
   /**
    * @ORM\Column(name="game", type="string", length=255)
    */
-  protected $game;
 
-  /**
-   * @ORM\Column(name="title", type="string", length=255)
-   */
   protected $title;
 
   /**
@@ -41,6 +37,11 @@ class games
    */
   protected $author;
 
+  public function __construct()
+  {
+    $this->date = new \Datetime();
+  }
+
   public function setId($id)
   {
     $this->id = $id;
@@ -50,15 +51,7 @@ class games
   {
     return $this->$id;
   }
-  public function setGame($game)
-  {
-    $this->game = $game;
-  }
 
-  public function GetGame()
-  {
-    return $this->$game;
-  }
   public function setTitle($title)
   {
     $this->title = $title;

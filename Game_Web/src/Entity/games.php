@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Entity\gamesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\gamesRepository")
  */
 class games
 {
@@ -61,6 +61,7 @@ class games
   {
     return $this->$title;
   }
+
   public function setComment($comment)
   {
     $this->comment = $comment;

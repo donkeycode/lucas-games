@@ -8,13 +8,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends Controller
 {
-  /**
-   * @Route("/", name="homepage")
-   */
-   public function HomepageAction()
-   {
-     return $this->render("home_page.html.twig");
-   }
+//  /**
+//   * @Route("/", name="homepage")
+//   */
+//   public function HomepageAction()
+//   {
+//     return $this->render("home_page.html.twig");
+//   }
 
 //   /**
 //    * @Route("/add", name="addgame")
@@ -27,10 +27,10 @@ class MainController extends Controller
     /**
      * @Route("/comments", name="addcomments")
      */
-     public function CommentsAction()
-     {
-       return $this->render("comments.html.twig");
-     }
+//     public function CommentsAction()
+//     {
+//       return $this->render("comments.html.twig");
+//     }
 }
 
 ?>

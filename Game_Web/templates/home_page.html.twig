@@ -67,7 +67,7 @@
             <div class="card-body">
               <h2 class="card-title"> {{ ActGame.game }}</h2>
               <p class="card-text"> {{ ActGame.comment }} </p>
-              <a href="/comments" class="btn btn-primary">Read More &rarr;</a>
+              <a href="/comments/{{ ActGame.game }}" class="btn btn-primary">Read More &rarr;</a>
             </div>
             <div class="card-footer text-muted">
               Posted on {{ ActGame.date.format('d-m-Y') }} by {{ ActGame.author }}

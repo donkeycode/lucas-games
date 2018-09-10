@@ -1,5 +1,5 @@
 <?php
-//src/Controller/homepage_controller.php
+//src/Controller/homepageController.php
 namespace App\Controller;
 
 use App\Entity\games;
@@ -8,8 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
-$pos = 0;
 
 class homepageController extends Controller
 {
@@ -40,14 +38,6 @@ class homepageController extends Controller
         'pos' => $pos)
       );
     }
-
-    /**
-     * @Route("/comments", name="commentspage")
-     */
-     public function commentsAction()
-     {
-       return $this->render('comments.html.twig');
-     }
 }
 /*   public function addAction(Request $request)
    {

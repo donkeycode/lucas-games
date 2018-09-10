@@ -16,32 +16,6 @@ class games
    */
   protected $id;
 
-  /**
-   * @ORM\Column(name="game", type="string", length=255)
-   */
-
-  protected $game;
-
-  /**
-   * @ORM\Column(name="comment", type="text")
-   */
-  protected $comment;
-
-  /**
-   * @ORM\Column(name="date", type="date")
-   */
-  protected $date;
-
-  /**
-   * @ORM\Column(name="author", type="string", length=255)
-   */
-  protected $author;
-
-  public function __construct()
-  {
-    $this->date = new \Datetime();
-  }
-
   public function setId($id)
   {
     $this->id = $id;
@@ -51,6 +25,11 @@ class games
   {
     return $this->id;
   }
+
+  /**
+   * @ORM\Column(name="game", type="string", length=255)
+   */
+  protected $game;
 
   public function setGame($game)
   {
@@ -62,6 +41,11 @@ class games
     return $this->game;
   }
 
+  /**
+   * @ORM\Column(name="comment", type="text")
+   */
+  protected $comment;
+
   public function setComment($comment)
   {
     $this->comment = $comment;
@@ -71,6 +55,17 @@ class games
   {
     return $this->comment;
   }
+
+  /**
+   * @ORM\Column(name="date", type="date")
+   */
+  protected $date;
+
+  public function __construct()
+  {
+    $this->date = new \Datetime();
+  }
+
   public function setDate($date)
   {
     $this->date = $date;
@@ -80,6 +75,12 @@ class games
   {
     return $this->date;
   }
+
+  /**
+   * @ORM\Column(name="author", type="string", length=255)
+   */
+  protected $author;
+
   public function setAuthor($author)
   {
     $this->author = $author;

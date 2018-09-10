@@ -8,13 +8,18 @@ use Doctrine\ORM\EntityRepository;
 
 class gamesRepository extends EntityRepository
 {
-  public function findAllComments()
-   {
+/*   public function ()
+    {
+      $qb = $this ->createQueryBuilder('g')
 
-     return $this ->createQueryBuilder('a')
-     ->getQuery()
-     ->getResult() ;
-   }
+      $qd
+        ->where("g.date < :date");
+          ->setParameter("date", new \Datetime());
+
+      return $qb
+          ->getQuery()
+          ->getResult() ;
+   }*/
 }
 
  ?>

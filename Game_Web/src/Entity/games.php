@@ -20,7 +20,7 @@ class games
    * @ORM\Column(name="game", type="string", length=255)
    */
 
-  protected $title;
+  protected $game;
 
   /**
    * @ORM\Column(name="comment", type="text")
@@ -49,17 +49,17 @@ class games
 
   public function GetId()
   {
-    return $this->$id;
+    return $this->id;
   }
 
-  public function setTitle($title)
+  public function setGame($game)
   {
-    $this->title = $title;
+    $this->game = $game;
   }
 
-  public function GetTitle()
+  public function GetGame()
   {
-    return $this->$title;
+    return $this->game;
   }
 
   public function setComment($comment)
@@ -69,7 +69,7 @@ class games
 
   public function GetComment()
   {
-    return $this->$comment;
+    return $this->comment;
   }
   public function setDate($date)
   {
@@ -78,7 +78,7 @@ class games
 
   public function GetDate()
   {
-    return $this->$date;
+    return $this->date;
   }
   public function setAuthor($author)
   {
@@ -87,7 +87,7 @@ class games
 
   public function GetAuthor()
   {
-    return $this->$author;
+    return $this->author;
   }
 }
 

@@ -9,42 +9,50 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+$pos = 0;
+
 class homepageController extends Controller
 {
-  private $id = 1;
   /**
-   * @Route("/", name="homepage")
+   * @Route("/{page}", name="homepage",
+   * requirements={"page"="\d+"})
    */
-   public function show()
+   public function viewAction($page = 1)
    {
-    $product = $this->getDoctrine()
-        ->getRepository(games::class)
-        ->find($this->id);
+     $pos = ($page * 3) - 3;
+     $game = $this->getDoctrine()
+          ->getRepository(games::class)
+          ->findBy(
+            array(),
+            array('date' => 'desc'),
+            3,
+            $pos
+          );
 
-    if (!$product) {
+     if (!$game) {
         throw $this->createNotFoundException(
-            'No product found for id '.$id
-        );
+          'No product found for id '.$id);
+      }
+      return $this->render('home_page.html.twig', array(
+        'game' => $game,
+        'next' => $page + 1,
+        'back' => $page - 1,
+        'pos' => $pos)
+      );
     }
 
-    return new Response('Check out this great product: '.$product->getGame());
-
-    // or render a template
-    // in the template, print things with {{ product.name }}
-    // return $this->render('product/show.html.twig', ['product' => $product]);
+    /**
+     * @Route("/comments", name="commentspage")
+     */
+     public function commentsAction()
+     {
+       return $this->render('comments.html.twig');
+     }
 }
-//     $repository = $this->getDoctrine()->getManager()->getRepository('App:games');
-//     $tofind = $repository->find($this->id);
-//
-//     if ($tofind === null) {
-//       throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
-//     }
-//     return $this->render('comments.html.twig', array('game' => $tofind->getTitle()));
-   }
 /*   public function addAction(Request $request)
    {
      $toadd = new games();
-     $toadd->setTitle("Uncharted");
+     $toadd->setGame("Uncharted");
      $toadd->setComment("On continue");
      $toadd->setAuthor("Max");
 

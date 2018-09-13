@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+
+          <h1 class="my-4">Page d'Accueil
+            <small>Derniers ajouts</small>
+          </h1>
+
+          <!-- Blog Post -->
+          {% if entities is not empty %}
+            {% for game in entities %}
+              <div class="card mb-4">
+                <img class="card-img-top" src="images/games/{{ game.imageName }}" alt="Card image cap">
+                  <div class="card-body">
+                    <h2 class="card-title"> {{ game.title }}</h2>
+                    <p class="card-text"> {{ game.description }} </p>
+                    <a href="/comments/{{ game.id }}" class="btn btn-primary"> Plus d'info &rarr;</a>
+                  </div>
+                <div class="card-footer text-muted">
+                  Posted on {{ game.datepost.format('d-m-Y') }} by {{ game.author }}
+                  <a href="#">Start Bootstrap</a>
+                </div>
+              </div>
+            {% else %}
+              <p>Aucun jeux trouvée.</p>
+            {% endfor %}
+
+          {% endif %}
+
+          <div class="pagerfanta">
+            {{ pagerfanta(pager, 'twitter_bootstrap4') }}
+          </div>
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+          <!-- Search Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Search</h5>
+            <div class="card-body">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button">Go!</button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Categories Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Categories</h5>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="#">Action</a>
+                    </li>
+                    <li>
+                      <a href="#">Aventure</a>
+                    </li>
+                    <li>
+                      <a href="#">Horreur</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-lg-6">
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="#">Sport</a>
+                    </li>
+                    <li>
+                      <a href="#">Indé</a>
+                    </li>
+                    <li>
+                      <a href="#">MMO</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Side Widget -->
+          <div class="card my-4">
+            <h5 class="card-header">Side Widget</h5>
+            <div class="card-body">
+              You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+{% endblock %}

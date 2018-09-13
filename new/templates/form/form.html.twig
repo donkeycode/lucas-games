@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% form_theme form 'add.html.twig' %}
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <title>Blog Post</title>
+
+  </head>
+
+  <body>
+    <h3>Formulaire d'annonce</h3>
+
+    {% block form_row %}
+    {% spaceless %}
+        <div class="form_row">
+            {{ form_label(form) }}
+            {{ form_errors(form) }}
+            {{ form_widget(form) }}
+            {{ form_help(form) }}
+        </div>
+    {% endspaceless %}
+    {% endblock form_row %}
+<!--
+    <div class="well">
+      {{ form(form) }}
+    </div>
+  -->
+  </body>

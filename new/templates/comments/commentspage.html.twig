@@ -1,42 +1,70 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
 {% block body %}
-    <!-- Page Content -->
+     <!-- Page Content -->
     <div class="container">
 
       <div class="row">
 
-        <!-- Blog Entries Column -->
-        <div class="col-md-8">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
 
-          <h1 class="my-4">Page d'Accueil
-            <small>Derniers ajouts</small>
-          </h1>
+          <!-- Title -->
+          <h1 class="mt-4"> {{ game.title }} </h1>
 
-          <!-- Blog Post -->
-          {% if entities is not empty %}
-            {% for game in entities %}
-              <div class="card mb-4">
-                <img class="card-img-top" src="images/games/{{ game.imageName }}" alt="Card image cap">
-                  <div class="card-body">
-                    <h2 class="card-title"> {{ game.title }}</h2>
-                    <p class="card-text"> {{ game.description }} </p>
-                    <a href="/commentaires.{{ game.id }}" class="btn btn-primary"> Plus d'info &rarr;</a>
-                  </div>
-                <div class="card-footer text-muted">
-                  Posted on {{ game.datepost.format('d-m-Y') }} by {{ game.author }}
+          <!-- Author -->
+          <p class="lead">
+            by
+            <a href="#"> {{ game.author }} </a>
+          </p>
+
+          <hr>
+
+          <!-- Date/Time -->
+          <p>Posted on {{ game.datepost.format('d-m-Y') }} </p>
+
+          <hr>
+
+          <!-- Preview Image -->
+          <img class="img-fluid rounded" src="images/games/{{ game.imageName }}" alt="">
+
+          <hr>
+
+          <!-- Post Content -->
+          <p class="lead"> {{ game.description }} </p>
+
+          <hr>
+
+          <!-- Comments Form -->
+          <div class="card my-4">
+            <h5 class="card-header">Leave a Comment:</h5>
+            <div class="card-body">
+              {{ form_start(form) }}
+                {{ form_row(form.author) }}
+                {{ form_row(form.comment) }}
+
+                <button type="submit">Envoyer!</button>
+              {{ form_end(form) }}
+            </div>
+          </div>
+
+          <!-- Comments -->
+          {% if comments is not empty %}
+            {% for comment in comments %}
+              <div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                  <h5 class="mt-0">{{ comment.author }}</h5>
+                  {{ comment.comment }}
                 </div>
               </div>
             {% endfor %}
           {% else %}
-            <p>Aucun jeux trouvée.</p>
+            <p> Il n'y a pas encore de commentaires :( </p>
+            <p> Soit le premier <p>
           {% endif %}
-
-          <ul class="pagination justify-content-center mb-4">
-            <div class="pagerfanta">
-              {{ pagerfanta(pager, 'twitter_bootstrap4') }}
-            </div>
-          </ul>
 
         </div>
 

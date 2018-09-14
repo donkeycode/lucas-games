@@ -14,7 +14,7 @@ class FormController extends AbstractController
 {
     /**
      * @Route("/form", name="form")
-     * @Template("form/index.html.twig")
+     * @Template("form/form.html.twig")
      */
     public function index(Request $request)
     {
@@ -33,7 +33,7 @@ class FormController extends AbstractController
 
     /**
      * @Route("/game/edit/{id}")
-     * @Template("form/index.html.twig")
+     * @Template("form/form.html.twig")
      */
     public function update(GamesRepository $qb, int $id, Request $request)
     {

@@ -9,38 +9,36 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\GamesRepository;
+use App\Repository\CommentsRepository;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\CommentsType;
 
 class CommentsController extends AbstractController
 {
     /**
-     * @Route("/comments/{id}", name="comments")
-     * @Template("comments/index.html.twig")
+     * @Route("/commentaires.{id}", name="view")
+     * @Template("comments/commentspage.html.twig")
      */
-    public function index(GamesRepository $qb, $id = 1)
+    public function index(GamesRepository $gmr, int $id, Request $request)
     {
-        $game = $qb->find($id);
+        $comment = new Comments;
 
-        return ['game' => $game];
-        // $comment = new Comments();
-        // $comment->setComment('J\' ai vraiment aimé ce jeu');
-        //
-        // $game = new Games();
-        // $game->setTitle('Hearthstone');
-        // $game->setDatepost(new \DateTime);
-        // $game->setDescription('Jeu de cartes');
-        // $game->setAuthor('Lucas');
-        // $game->setCategory('Aventure');
-        //
-        // $game->addComment($comment);
-        //
-        // $em = $this->getDoctrine()->getManager();
-        // $em->persist($comment);
-        // $em->persist($game);
-        // $em->flush();
-        //
-        // return new Response(
-        //     'Saved new product with id: '.$product->getId()
-        //     .' and new category with id: '.$category->getId()
-        // );
+        $form = $this->createForm(CommentsType::class, $comment);
+
+        $game = $gmr->find($id);
+        $comments = $game->getComments();
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $game->addComment($comment);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->persist($game);
+            $em->flush();
+        }
+
+        return ['game' => $game,
+            'comments' => $comments,
+            'form' => $form->createView()
+        ];
     }
 }

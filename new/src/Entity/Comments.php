@@ -27,6 +27,11 @@ class Comments
      */
     private $games;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $author;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class Comments
     public function setGames(?Games $games): self
     {
         $this->games = $games;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(string $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

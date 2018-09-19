@@ -11,10 +11,10 @@
 
           <!-- Bootstrap core CSS -->
         {% block css %}
-          <link href="homepage/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+          <link href="/homepage/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
           <!-- Custom styles for this template -->
-          <link href="homepage/css/blog-home.css" rel="stylesheet">
+          <link href="/homepage/css/blog-home.css" rel="stylesheet">
         {% endblock %}
 
     </head>
@@ -37,14 +37,21 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Commentaires</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Nouveautés</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="/form">Ajouter</a>
               </li>
+                {% if is_granted('ROLE_USER') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('logout')}}">Déconnexion</a>
+                </li>
+                {% else %}
+                <li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
+                    <a class="nav-link" href="{{path('login')}}">Connexion</a>
+                </li>
+                <li class="nav-item {% if mainNavRegistration is defined %}active{% endif %}">
+                    <a class="nav-link" href="{{path('register')}}">Inscription</a>
+                </li>
+                {% endif %}
+
             </ul>
           </div>
         </div>

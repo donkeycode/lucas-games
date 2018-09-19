@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{% block nav %}
+    {{ parent() }}
+{% endblock %}
+
+<style>
+    .wrapper { margin: 9em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+    {% if error %}
+        <div class="alert alert-danger">
+            <ul class="list-unstyled mb-0">
+                <li>
+                    <span class="initialism form-error-icon badge badge-danger">Error</span>
+                    <span class="form-error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+
+    <div class="wrapper">
+
+        {{form(form)}}
+
+    </div>
+
+    {% block footer %}
+        {{ parent() }}
+    {% endblock %}
+
+{% endblock %}

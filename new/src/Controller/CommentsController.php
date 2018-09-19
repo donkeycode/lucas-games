@@ -16,7 +16,7 @@ use App\Form\CommentsType;
 class CommentsController extends AbstractController
 {
     /**
-     * @Route("/commentaires.{id}", name="view")
+     * @Route("/comments/{id}", name="view")
      * @Template("comments/commentspage.html.twig")
      */
     public function index(GamesRepository $gmr, int $id, Request $request)

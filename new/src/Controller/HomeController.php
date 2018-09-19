@@ -20,12 +20,8 @@ class HomeController extends AbstractController
      */
     public function index(GamesRepository $qb, Request $request)
     {
-        $pagerfanta = $qb->getPager();
-        $entities = $pagerfanta
-            ->setMaxPerPage(3)
-            ->setCurrentPage($request->get('page', 1))
-            ->getCurrentPageResults();
+        $pager = $qb->getPager(3, $request);
 
-        return ['entities' => $entities, 'pager' => $pagerfanta];
+        return ['entities' => $pager, 'pager' => $pager];
     }
 }

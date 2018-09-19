@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @method Games|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,8 +22,15 @@ class GamesRepository extends ServiceEntityRepository
         parent::__construct($registry, Games::class);
     }
 
-    public function getPager()
+    public function getPager(int $nbMax, Request $request)
     {
-        return new Pagerfanta(new DoctrineORMAdapter($this->createQueryBuilder('g')));
+        $pagerfanta = new Pagerfanta(new DoctrineORMAdapter($this->createQueryBuilder('g')));
+
+        $pagerfanta
+            ->setMaxPerPage($nbMax)
+            ->setCurrentPage($request->get('page', 1))
+            ->getCurrentPageResults();
+
+        return $pagerfanta;
     }
 }

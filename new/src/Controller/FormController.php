@@ -58,9 +58,9 @@ class FormController extends AbstractController
     public function accepteForm(Request $request, $form, $game)
     {
       if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-          $em = $this->getDoctrine()->getManager();
-          $em->persist($game);
-          $em->flush();
+           $em = $this->getDoctrine()->getManager();
+           $em->persist($game);
+           $em->flush();
 
           return true;
       }

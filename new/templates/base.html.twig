@@ -32,26 +32,28 @@
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="/">Accueil
+                <a class="nav-link" href=" {{ path('home') }} ">Accueil
                   <span class="sr-only">(current)</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/form">Ajouter</a>
+                <a class="nav-link" href=" {{ path('form') }} ">Ajouter</a>
               </li>
                 {% if is_granted('ROLE_USER') %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{path('logout')}}">Déconnexion</a>
+                  <a class="nav-link" href="{{ path('advert') }}">Mes Annonces</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('logout') }}">Déconnexion</a>
                 </li>
                 {% else %}
                 <li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
-                    <a class="nav-link" href="{{path('login')}}">Connexion</a>
+                    <a class="nav-link" href="{{ path('login') }}">Connexion</a>
                 </li>
                 <li class="nav-item {% if mainNavRegistration is defined %}active{% endif %}">
-                    <a class="nav-link" href="{{path('register')}}">Inscription</a>
+                    <a class="nav-link" href="{{ path('register') }}">Inscription</a>
                 </li>
                 {% endif %}
-
             </ul>
           </div>
         </div>
@@ -82,26 +84,26 @@
             <div class="col-lg-6">
               <ul class="list-unstyled mb-0">
                 <li>
-                  <a href="/category.Action">Action</a>
+                  <a href="/category/Action">Action</a>
                 </li>
                 <li>
-                  <a href="/category.Aventure">Aventure</a>
+                  <a href="/category/Aventure">Aventure</a>
                 </li>
                 <li>
-                  <a href="/category.Horreur">Horreur</a>
+                  <a href="/category/Horreur">Horreur</a>
                 </li>
               </ul>
             </div>
             <div class="col-lg-6">
               <ul class="list-unstyled mb-0">
                 <li>
-                  <a href="/category.MOBA">MOBA</a>
+                  <a href="/category/MOBA">MOBA</a>
                 </li>
                 <li>
-                  <a href="/category.Indé">Indé</a>
+                  <a href="/category/Indé">Indé</a>
                 </li>
                 <li>
-                  <a href="/category.MMO">MMO</a>
+                  <a href="/category/MMO">MMO</a>
                 </li>
               </ul>
             </div>

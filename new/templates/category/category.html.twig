@@ -14,15 +14,15 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 
-          <h1 class="my-4">Page d'Accueil
-            <small>Derniers ajouts</small>
+          <h1 class="my-4">Catégorie
+            <small>{{ category.name }}</small>
           </h1>
 
           <!-- Blog Post -->
-          {% if entities is not empty %}
-            {% for game in entities %}
+          {% if games is not empty %}
+            {% for game in games %}
               <div class="card mb-4">
-                <img class="card-img-top" src="images/games/{{ game.imageName }}" alt="Card image cap">
+                <img class="card-img-top" src="/images/games/{{ game.imageName }}" alt="Card image cap">
                   <div class="card-body">
                     <h2 class="card-title"> {{ game.title }}</h2>
                     <p class="card-text"> {{ game.description }} </p>

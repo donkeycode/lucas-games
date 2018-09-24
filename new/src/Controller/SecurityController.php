@@ -6,30 +6,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use App\Form\LoginType;
 
 class SecurityController extends AbstractController
 {
     /**
      * @Route("/login", name="login")
+     * @Template("security/login.html.twig")
      */
-    public function login(Request $request, AuthenticationUtils $authenticationUtils) {
-        // get the login error if there is one
+    public function login(Request $request, AuthenticationUtils $authenticationUtils)
+    {
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        $form = $this->get('form.factory')
-            ->createNamedBuilder(null)
-            ->add('_username', null, ['label' => 'Email'])
-            ->add('_password', \Symfony\Component\Form\Extension\Core\Type\PasswordType::class, ['label' => 'Mot de passe'])
-            ->add('ok', \Symfony\Component\Form\Extension\Core\Type\SubmitType::class, ['label' => 'Ok', 'attr' => ['class' => 'btn-primary btn-block']])
-            ->getForm();
-
-        return $this->render('security/login.html.twig', [
-            'mainNavLogin' => true, 'title' => 'homepage',
-            'form' => $form->createView(),
-            'last_username' => $lastUsername,
+        return ['last_username' => $lastUsername,
             'error' => $error,
-        ]);
+        ];
     }
 }

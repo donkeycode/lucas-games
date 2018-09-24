@@ -14,13 +14,11 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 
-          <h1 class="my-4">Catégorie
-            <small>{{ category.name }}</small>
-          </h1>
+          <h1 class="my-4">Mes Annonces</h1>
 
           <!-- Blog Post -->
-          {% if games is not empty %}
-            {% for game in games %}
+          {% if entities is not empty %}
+            {% for game in entities %}
               <div class="card mb-4">
                 <img class="card-img-top" src="images/games/{{ game.imageName }}" alt="Card image cap">
                   <div class="card-body">

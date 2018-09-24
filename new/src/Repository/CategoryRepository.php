@@ -7,7 +7,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Adapter\DoctrineCollectionAdapter;
 
 /**
@@ -36,5 +35,14 @@ class CategoryRepository extends ServiceEntityRepository
             ->getNbPages();
 
         return $pagerfanta;
+    }
+
+    public function checkDate($a, $b)
+    {
+        if ($a->datepost > $b->datepost)
+            return true;
+        else {
+            return false;
+        }
     }
 }

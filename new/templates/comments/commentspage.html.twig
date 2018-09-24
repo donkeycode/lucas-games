@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% if is_granted('ROLE_USER') %}
+  {% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% endif %}
 
 {% block body %}
 
@@ -43,17 +45,21 @@
           <hr>
 
           <!-- Comments Form -->
-          <div class="card my-4">
-            <h5 class="card-header">Leave a Comment:</h5>
-            <div class="card-body">
-              {{ form_start(form) }}
-                {{ form_row(form.author) }}
-                {{ form_row(form.comment) }}
+          {% if is_granted('ROLE_USER') %}
+            <div class="card my-4">
+              <h5 class="card-header">Laisser un commentaire:</h5>
+              <div class="card-body">
+                {{ form_start(form) }}
+                  {{ form_row(form.comment) }}
 
-                <button type="submit">Envoyer!</button>
-              {{ form_end(form) }}
+                  <button type="submit">Envoyer!</button>
+                {{ form_end(form) }}
+              </div>
             </div>
-          </div>
+          {% else %}
+              <h5> Connecte toi pour laisser un commentaire </h5>
+              <a href="{{ path('login') }}" class="btn btn-primary"> Connection </a>
+          {% endif %}
 
           <!-- Comments -->
           {% if comments is not empty %}
@@ -67,8 +73,9 @@
               </div>
             {% endfor %}
           {% else %}
-            <p> Il n'y a pas encore de commentaires :( </p>
-            <p> Soit le premier <p>
+            <div class="card my-4">
+              <p> Il n'y a pas encore de commentaires :( </p>
+            </div>
           {% endif %}
 
         </div>

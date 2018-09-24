@@ -7,11 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Form\CategoryType;
 use App\Entity\Category;
 
 class GamesType extends AbstractType
@@ -22,14 +20,13 @@ class GamesType extends AbstractType
             ->add('title', TextType::class)
             ->add('datepost', DateType::class)
             ->add('description', TextType::class)
-            ->add('author', TextType::class)
             ->add('imageFile', VichImageType::class)
             ->add('category', EntityType::class, [
-              'class' => Category::class,
-              'choice_label' => 'name',
-              'multiple' => true,
-              'expanded' => true])
-            ;
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true])
+              ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

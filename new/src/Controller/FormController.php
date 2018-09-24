@@ -6,9 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Games;
-use App\Repository\GamesRepository;
 use App\Form\GamesType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use App\Service\CheckForm;
 
 class FormController extends AbstractController
 {
@@ -16,55 +16,24 @@ class FormController extends AbstractController
      * @Route("/form", name="form")
      * @Template("form/form.html.twig")
      */
-    public function index(Request $request)
+    public function addForm(Request $request, CheckForm $check)
     {
-        $game = new Games;
-        $game->setDatepost(new \DateTime());
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $form = $this->createForm(GamesType::class, $game);
+        if ($user = $this->getUser()) {
+            $game = new Games;
 
-        if ($this->accepteForm($request, $form, $game)) {
-
-            return $this->redirectToRoute('home');
-        }
-
-        return ['form' => $form->createView()];
-    }
-
-    /**
-     * @Route("/game/edit/{id}")
-     * @Template("form/form.html.twig")
-     */
-    public function update(GamesRepository $qb, int $id, Request $request)
-    {
-        $game = $qb->find($id);
-
-        $form = $this->createForm(GamesType::class, $game);
-
-        if (!$game) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$id
+            $form = $this->createForm(GamesType::class, $game
+                ->setDatepost(new \DateTime())
+                ->setAuthor($user->getPseudo())
             );
-        }
 
-        if ($this->accepteForm($request, $form, $game)) {
+            if ($check->accepteAdvert($request, $form, $game)) {
 
-            return $this->redirectToRoute('home');
+                return $this->redirectToRoute('home');
+            }
         }
 
         return ['form' => $form->createView()];
-    }
-
-    public function accepteForm(Request $request, $form, $game)
-    {
-      if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-           $em = $this->getDoctrine()->getManager();
-           $em->persist($game);
-           $em->flush();
-
-          return true;
-      }
-
-      return false;
     }
 }

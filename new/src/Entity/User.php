@@ -48,6 +48,11 @@ class User implements UserInterface, \Serializable
      */
     private $roles = [];
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $pseudo;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -104,8 +109,6 @@ class User implements UserInterface, \Serializable
             $this->email,
             $this->password,
             $this->isActive,
-                // see section on salt below
-                // $this->salt,
         ));
     }
 
@@ -117,8 +120,6 @@ class User implements UserInterface, \Serializable
             $this->email,
             $this->password,
             $this->isActive,
-            // see section on salt below
-            // $this->salt
         ) = unserialize($serialized);
     }
 
@@ -160,5 +161,17 @@ class User implements UserInterface, \Serializable
     function setIsActive($isActive)
     {
         $this->isActive = $isActive;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
     }
 }

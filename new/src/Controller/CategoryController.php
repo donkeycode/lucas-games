@@ -11,8 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category.{name}", name="category")
-     * @Template("category/index.html.twig")
+     * @Route("/category/{name}", name="category")
+     * @Template("category/category.html.twig")
      */
     public function index(string $name, CategoryRepository $qbC, Request $request)
     {
